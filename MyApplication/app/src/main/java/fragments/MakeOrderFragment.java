@@ -21,7 +21,7 @@ import ca.team5.perishablereportingapplication.R;
 import data.Order;
 import data.OrderItem;
 
-public class MakeOrderFragment extends Fragment implements View.OnClickListener, OnChildSelectedListener, AdapterView.OnItemSelectedListener {
+public class MakeOrderFragment extends Fragment implements View.OnClickListener, OnChildSelectedListener, AdapterView.OnItemClickListener {
     private static final String TAG = "MakeOrderF";
     private HorizontalGridView gridView;
     private ListView listView;
@@ -65,7 +65,7 @@ public class MakeOrderFragment extends Fragment implements View.OnClickListener,
             btnAddItem.setOnClickListener(this);
             btnAddOrder.setOnClickListener(this);
             gridView.setOnChildSelectedListener(this);
-            listView.setOnItemSelectedListener(this);
+            listView.setOnItemClickListener(this);
         }
     }
 
@@ -74,13 +74,17 @@ public class MakeOrderFragment extends Fragment implements View.OnClickListener,
         switch (view.getId()) {
             case R.id.fmo_btn_add_item:
                 OrderItem item = new OrderItem();
-                if (etOtherName.getText() == null) {
+                if (adapter.getSelectedIndex() != -1) {
                     item.setName(adapter.getSelectedItem().getName());
-                } else {
+                } else if (etOtherName.getText() != null && !etOtherName.getText().toString().equals("")) {
                     item.setName(etOtherName.getText().toString());
+                } else {
+                    return;
                 }
-                if (etQuantity.getText() != null) {
+                if (etQuantity.getText() != null && etQuantity.getText().toString().matches("\\d+")) {
                     item.setQuantity(Integer.parseInt(etQuantity.getText().toString()));
+                } else {
+                    item.setQuantity(1);
                 }
                 addedAdapter.add(item);
                 etOtherName.getText().clear();
@@ -106,12 +110,8 @@ public class MakeOrderFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         addedAdapter.removeAt(i);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 }

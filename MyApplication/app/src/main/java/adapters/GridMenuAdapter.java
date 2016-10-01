@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import ca.team5.perishablereportingapplication.R;
 import fragments.LoginFragment;
 import fragments.MakeOrderFragment;
+import fragments.ReserveOrderFragment;
 
 public class GridMenuAdapter extends BaseAdapter {
     private Context context = null;
@@ -27,8 +28,11 @@ public class GridMenuAdapter extends BaseAdapter {
     private void populate() {
         LoginFragment loginFragment = LoginFragment.newInstance();
         MakeOrderFragment makeOrderFragment = MakeOrderFragment.newInstance();
-        fragments.add(makeOrderFragment);
+        ReserveOrderFragment roFrag = ReserveOrderFragment.newInstance();
         fragments.add(loginFragment);
+        fragments.add(makeOrderFragment);
+        fragments.add(roFrag);
+
     }
 
     @Override
@@ -63,6 +67,8 @@ public class GridMenuAdapter extends BaseAdapter {
                 return context.getDrawable(R.drawable.login);
             case 1:
                 return context.getDrawable(R.drawable.paperwithcheck);
+            case 2:
+                return context.getDrawable(R.drawable.canned);
             default:
                 return context.getDrawable(R.drawable.canned);
         }
@@ -73,6 +79,8 @@ public class GridMenuAdapter extends BaseAdapter {
                 return "Login";
             case 1:
                 return "Make Order";
+            case 2:
+                return "Reserve Order";
             default:
                 return "";
         }

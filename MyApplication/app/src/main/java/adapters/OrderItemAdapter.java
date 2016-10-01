@@ -61,6 +61,10 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
         selectedIndex = position;
     }
 
+    public int getSelectedIndex() {
+        return selectedIndex;
+    }
+
     public class OrderItemPresetHolder extends RecyclerView.ViewHolder {
         public ImageView iv;
         public TextView tv;

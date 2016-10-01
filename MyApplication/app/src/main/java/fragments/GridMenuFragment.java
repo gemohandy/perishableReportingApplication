@@ -56,7 +56,9 @@ public class GridMenuFragment extends Fragment implements AdapterView.OnItemClic
                 }
                 break;
             default:
-
+                if (getActivity() != null) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, adapter.getItem(i), adapter.getItem(i).getTag()).addToBackStack(adapter.getItem(i).getTag()).commitAllowingStateLoss();
+                }
                 break;
         }
     }

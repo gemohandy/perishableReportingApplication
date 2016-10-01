@@ -99,4 +99,9 @@ public class Order implements Parcelable {
     public void setItems(ArrayList<OrderItem> items) {
         this.items = items;
     }
+
+    @Override
+    public String toString() {
+        return "Order put in at " + getDateTime();
+    }
 }
