@@ -17,6 +17,9 @@
         <AssociationConnector Association="dbPerishableModel.FK_tblOrder_tblCompany" ManuallyRouted="false" />
         <AssociationConnector Association="dbPerishableModel.FK_tblOrderItem_tblOrder" ManuallyRouted="false" />
         <AssociationConnector Association="dbPerishableModel.FK_tblReservation_tblOrder" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbPerishableModel.tblLogin" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="dbPerishableModel.FK_tblLogin_tblCharity" />
+        <AssociationConnector Association="dbPerishableModel.FK_tblLogin_tblCompany" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

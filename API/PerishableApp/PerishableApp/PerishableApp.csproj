@@ -185,6 +185,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\tblCharitiesController.cs" />
     <Compile Include="Controllers\tblCompaniesController.cs" />
+    <Compile Include="Controllers\tblLoginsController.cs" />
     <Compile Include="Controllers\tblOrderItemsController.cs" />
     <Compile Include="Controllers\tblOrdersController.cs" />
     <Compile Include="Controllers\tblPlacesController.cs" />
@@ -211,10 +212,14 @@
       <DependentUpon>Perishable.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Perishableapp.cs" />
+    <Compile Include="Models\Perishableapp2.cs" />
     <Compile Include="Models\tblCharity.cs">
       <DependentUpon>Perishable.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblCompany.cs">
+      <DependentUpon>Perishable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblLogin.cs">
       <DependentUpon>Perishable.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblOrder.cs">

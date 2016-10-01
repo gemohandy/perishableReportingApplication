@@ -18,6 +18,7 @@ namespace PerishableApp.Models
         public virtual DbSet<tblOrderItem> tblOrderItems { get; set; }
         public virtual DbSet<tblPlace> tblPlaces { get; set; }
         public virtual DbSet<tblReservation> tblReservations { get; set; }
+        public virtual DbSet<tblLogin> tblLogins { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -88,6 +89,29 @@ namespace PerishableApp.Models
                 .WithRequired(e => e.tblPlace)
                 .HasForeignKey(e => e.fk_PlaceID)
                 .WillCascadeOnDelete(false);
+            modelBuilder.Entity<tblLogin>()
+               .Property(e => e.Username)
+               .IsUnicode(false);
+
+            modelBuilder.Entity<tblLogin>()
+                .Property(e => e.Password)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<tblLogin>()
+                .Property(e => e.PasswordHash)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<tblLogin>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<tblLogin>()
+                .Property(e => e.Phone)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<tblLogin>()
+                .Property(e => e.Email)
+                .IsUnicode(false);
         }
     }
 }

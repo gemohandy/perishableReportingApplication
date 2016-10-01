@@ -17,7 +17,8 @@ namespace PerishableApp.Views
         // GET: tblReservations
         public ActionResult Index()
         {
-            var tblReservations = db.tblReservations.Include(t => t.tblCharity).Include(t => t.tblOrder);
+            //var tblReservations = db.tblReservations.Include(t => t.tblCharity).Include(t => t.tblOrder);
+            var tblReservations = db.tblReservations;
             return View(tblReservations.ToList());
         }
 

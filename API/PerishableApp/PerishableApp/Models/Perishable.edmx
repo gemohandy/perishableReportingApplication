@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbPerishableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbPerishableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblCharity">
           <Key>
             <PropertyRef Name="Id" />
@@ -18,6 +18,20 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fk_PlaceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="150" />
+          <Property Name="PasswordHash" Type="varchar(max)" />
+          <Property Name="fk_CompanyID" Type="int" />
+          <Property Name="fk_CharityID" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="75" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="tblOrder">
           <Key>
@@ -84,6 +98,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblLogin_tblCharity">
+          <End Role="tblCharity" Type="Self.tblCharity" Multiplicity="0..1" />
+          <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCharity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblLogin">
+              <PropertyRef Name="fk_CharityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblLogin_tblCompany">
+          <End Role="tblCompany" Type="Self.tblCompany" Multiplicity="0..1" />
+          <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCompany">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblLogin">
+              <PropertyRef Name="fk_CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblOrder_tblCompany">
           <End Role="tblCompany" Type="Self.tblCompany" Multiplicity="1" />
           <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
@@ -135,6 +173,7 @@
         <EntityContainer Name="dbPerishableModelStoreContainer">
           <EntitySet Name="tblCharity" EntityType="Self.tblCharity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCompany" EntityType="Self.tblCompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLogin" EntityType="Self.tblLogin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOrder" EntityType="Self.tblOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOrderItem" EntityType="Self.tblOrderItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPlace" EntityType="Self.tblPlace" Schema="dbo" store:Type="Tables" />
@@ -146,6 +185,14 @@
           <AssociationSet Name="FK_tblCompany_tblPlace" Association="Self.FK_tblCompany_tblPlace">
             <End Role="tblPlace" EntitySet="tblPlace" />
             <End Role="tblCompany" EntitySet="tblCompany" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLogin_tblCharity" Association="Self.FK_tblLogin_tblCharity">
+            <End Role="tblCharity" EntitySet="tblCharity" />
+            <End Role="tblLogin" EntitySet="tblLogin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLogin_tblCompany" Association="Self.FK_tblLogin_tblCompany">
+            <End Role="tblCompany" EntitySet="tblCompany" />
+            <End Role="tblLogin" EntitySet="tblLogin" />
           </AssociationSet>
           <AssociationSet Name="FK_tblOrder_tblCompany" Association="Self.FK_tblOrder_tblCompany">
             <End Role="tblCompany" EntitySet="tblCompany" />
@@ -164,8 +211,7 @@
             <End Role="tblReservation" EntitySet="tblReservation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbPerishableModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -177,6 +223,7 @@
           <Property Name="fk_PlaceID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblPlace" Relationship="Self.FK_tblCharity_tblPlace" FromRole="tblCharity" ToRole="tblPlace" />
           <NavigationProperty Name="tblReservations" Relationship="Self.FK_tblReservation_tblCharity" FromRole="tblCharity" ToRole="tblReservation" />
+          <NavigationProperty Name="tblLogins" Relationship="dbPerishableModel.FK_tblLogin_tblCharity" FromRole="tblCharity" ToRole="tblLogin" />
         </EntityType>
         <EntityType Name="tblCompany">
           <Key>
@@ -186,6 +233,7 @@
           <Property Name="fk_PlaceID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblPlace" Relationship="Self.FK_tblCompany_tblPlace" FromRole="tblCompany" ToRole="tblPlace" />
           <NavigationProperty Name="tblOrders" Relationship="Self.FK_tblOrder_tblCompany" FromRole="tblCompany" ToRole="tblOrder" />
+          <NavigationProperty Name="tblLogins" Relationship="dbPerishableModel.FK_tblLogin_tblCompany" FromRole="tblCompany" ToRole="tblLogin" />
         </EntityType>
         <EntityType Name="tblOrder">
           <Key>
@@ -339,7 +387,56 @@
             <End Role="tblOrder" EntitySet="tblOrders" />
             <End Role="tblReservation" EntitySet="tblReservations" />
           </AssociationSet>
+          <EntitySet Name="tblLogins" EntityType="dbPerishableModel.tblLogin" />
+          <AssociationSet Name="FK_tblLogin_tblCharity" Association="dbPerishableModel.FK_tblLogin_tblCharity">
+            <End Role="tblCharity" EntitySet="tblCharities" />
+            <End Role="tblLogin" EntitySet="tblLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLogin_tblCompany" Association="dbPerishableModel.FK_tblLogin_tblCompany">
+            <End Role="tblCompany" EntitySet="tblCompanies" />
+            <End Role="tblLogin" EntitySet="tblLogins" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tblLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fk_CompanyID" Type="Int32" />
+          <Property Name="fk_CharityID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblCharity" Relationship="dbPerishableModel.FK_tblLogin_tblCharity" FromRole="tblLogin" ToRole="tblCharity" />
+          <NavigationProperty Name="tblCompany" Relationship="dbPerishableModel.FK_tblLogin_tblCompany" FromRole="tblLogin" ToRole="tblCompany" />
+        </EntityType>
+        <Association Name="FK_tblLogin_tblCharity">
+          <End Type="dbPerishableModel.tblCharity" Role="tblCharity" Multiplicity="0..1" />
+          <End Type="dbPerishableModel.tblLogin" Role="tblLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCharity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblLogin">
+              <PropertyRef Name="fk_CharityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblLogin_tblCompany">
+          <End Type="dbPerishableModel.tblCompany" Role="tblCompany" Multiplicity="0..1" />
+          <End Type="dbPerishableModel.tblLogin" Role="tblLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCompany">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblLogin">
+              <PropertyRef Name="fk_CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -404,6 +501,21 @@
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="fk_OrderID" ColumnName="fk_OrderID" />
                 <ScalarProperty Name="fk_CharityID" ColumnName="fk_CharityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLogins">
+            <EntityTypeMapping TypeName="dbPerishableModel.tblLogin">
+              <MappingFragment StoreEntitySet="tblLogin">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="fk_CharityID" ColumnName="fk_CharityID" />
+                <ScalarProperty Name="fk_CompanyID" ColumnName="fk_CompanyID" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -31,5 +31,6 @@ namespace PerishableApp.Models
         public virtual DbSet<tblOrderItem> tblOrderItems { get; set; }
         public virtual DbSet<tblPlace> tblPlaces { get; set; }
         public virtual DbSet<tblReservation> tblReservations { get; set; }
+        public virtual DbSet<tblLogin> tblLogins { get; set; }
     }
 }

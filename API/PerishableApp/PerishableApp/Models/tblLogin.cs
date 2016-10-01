@@ -12,13 +12,19 @@ namespace PerishableApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tblOrderItem
+    public partial class tblLogin
     {
         public int Id { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string PasswordHash { get; set; }
+        public Nullable<int> fk_CompanyID { get; set; }
+        public Nullable<int> fk_CharityID { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public int fk_OrderID { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
     
-        public virtual tblOrder tblOrder { get; set; }
+        public virtual tblCharity tblCharity { get; set; }
+        public virtual tblCompany tblCompany { get; set; }
     }
 }

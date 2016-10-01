@@ -14,6 +14,20 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="fk_PlaceID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="tblLogin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="150" />
+    <Property Name="PasswordHash" Type="varchar(max)" />
+    <Property Name="fk_CompanyID" Type="int" />
+    <Property Name="fk_CharityID" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="75" />
+    <Property Name="Phone" Type="varchar" MaxLength="10" />
+    <Property Name="Email" Type="varchar" MaxLength="150" />
+  </EntityType>
   <EntityType Name="tblOrder">
     <Key>
       <PropertyRef Name="Id" />
@@ -79,6 +93,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tblLogin_tblCharity">
+    <End Role="tblCharity" Type="Self.tblCharity" Multiplicity="0..1" />
+    <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCharity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblLogin">
+        <PropertyRef Name="fk_CharityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLogin_tblCompany">
+    <End Role="tblCompany" Type="Self.tblCompany" Multiplicity="0..1" />
+    <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCompany">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblLogin">
+        <PropertyRef Name="fk_CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tblOrder_tblCompany">
     <End Role="tblCompany" Type="Self.tblCompany" Multiplicity="1" />
     <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
@@ -130,6 +168,7 @@
   <EntityContainer Name="dbPerishableModelStoreContainer">
     <EntitySet Name="tblCharity" EntityType="Self.tblCharity" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblCompany" EntityType="Self.tblCompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLogin" EntityType="Self.tblLogin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOrder" EntityType="Self.tblOrder" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOrderItem" EntityType="Self.tblOrderItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPlace" EntityType="Self.tblPlace" Schema="dbo" store:Type="Tables" />
@@ -141,6 +180,14 @@
     <AssociationSet Name="FK_tblCompany_tblPlace" Association="Self.FK_tblCompany_tblPlace">
       <End Role="tblPlace" EntitySet="tblPlace" />
       <End Role="tblCompany" EntitySet="tblCompany" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLogin_tblCharity" Association="Self.FK_tblLogin_tblCharity">
+      <End Role="tblCharity" EntitySet="tblCharity" />
+      <End Role="tblLogin" EntitySet="tblLogin" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLogin_tblCompany" Association="Self.FK_tblLogin_tblCompany">
+      <End Role="tblCompany" EntitySet="tblCompany" />
+      <End Role="tblLogin" EntitySet="tblLogin" />
     </AssociationSet>
     <AssociationSet Name="FK_tblOrder_tblCompany" Association="Self.FK_tblOrder_tblCompany">
       <End Role="tblCompany" EntitySet="tblCompany" />
