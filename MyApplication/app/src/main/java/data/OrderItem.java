@@ -10,11 +10,15 @@ public class OrderItem implements Parcelable {
     private int fk_OrderID = -1;
 
 
-    protected OrderItem(Parcel in) {
+    public OrderItem(Parcel in) {
         Id = in.readInt();
         Name = in.readString();
         Quantity = in.readInt();
         fk_OrderID = in.readInt();
+    }
+
+    public OrderItem() {
+
     }
 
     @Override

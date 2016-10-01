@@ -14,12 +14,16 @@ public class Order implements Parcelable {
     private int fk_CompanyID = -1;
     private ArrayList<OrderItem> items = new ArrayList<>();
 
-    protected Order(Parcel in) {
+    public Order(Parcel in) {
         Id = in.readInt();
         DateTime = in.readString();
         isActive = in.readByte() != 0;
         fk_CompanyID = in.readInt();
         in.readTypedList(items, OrderItem.CREATOR);
+    }
+
+    public Order() {
+
     }
 
     @Override

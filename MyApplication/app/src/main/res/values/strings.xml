@@ -16,4 +16,6 @@
     <string name="enter_a_quantity_opt">Quantity (Opt.):</string>
     <string name="add">Add</string>
     <string name="or_enter_a_name">Or Enter A Name</string>
+    <string name="add_order">Add Order</string>
+    <string name="add_item">Add Item</string>
 </resources>
