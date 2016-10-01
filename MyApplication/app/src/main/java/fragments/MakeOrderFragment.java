@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.Calendar;
@@ -64,7 +63,6 @@ public class MakeOrderFragment extends Fragment implements View.OnClickListener,
             listView.setAdapter(addedAdapter);
             btnAddItem.setOnClickListener(this);
             btnAddOrder.setOnClickListener(this);
-            gridView.setOnChildSelectedListener(this);
             listView.setOnItemClickListener(this);
         }
     }

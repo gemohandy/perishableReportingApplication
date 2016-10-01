@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="@color/transparent_white_percent_50"
-    android:minHeight="100dp">
+    android:minHeight="100dp"
+    android:minWidth="100dp">
     <ImageView
         android:id="@+id/igm_iv_feature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:padding="8dp"
+        android:scaleType="fitCenter"
         android:background="@android:color/transparent"
         tools:text="Hello World"/>
 
@@ -22,7 +24,7 @@
         android:padding="8dp"
         android:background="@android:color/transparent"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         android:gravity="center"
         tools:text="Hello World"/>

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import ca.team5.perishablereportingapplication.R;
 import data.OrderItemPreset;
+import enumerators.OrderItemEnum;
 
 public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.OrderItemPresetHolder> {
     private Context context;
@@ -24,7 +25,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
     }
 
     private void populatePresets() {
-        //TODO populate Presets
+        presets = OrderItemEnum.getItems();
     }
 
     @Override
@@ -35,14 +36,21 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
     }
 
     @Override
-    public void onBindViewHolder(OrderItemPresetHolder holder, int position) {
+    public void onBindViewHolder(OrderItemPresetHolder holder, final int position) {
         holder.iv.setImageResource(presets.get(position).getResId());
         holder.tv.setText(presets.get(position).getName());
         if (selectedIndex == position) {
-            holder.itemView.setAlpha(.5f);
+            holder.itemView.setAlpha(1f);
         } else {
-            holder.itemView.setAlpha(0f);
+            holder.itemView.setAlpha(.5f);
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedIndex = position;
+                notifyDataSetChanged();
+            }
+        });
     }
     @Override
     public int getItemCount() {

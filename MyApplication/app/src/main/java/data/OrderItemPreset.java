@@ -7,7 +7,7 @@ public class OrderItemPreset implements Parcelable {
     private String Name;
     private int resId;
 
-    protected OrderItemPreset(Parcel in) {
+    public OrderItemPreset(Parcel in) {
         Name = in.readString();
         resId = in.readInt();
     }
@@ -23,6 +23,10 @@ public class OrderItemPreset implements Parcelable {
             return new OrderItemPreset[size];
         }
     };
+
+    public OrderItemPreset() {
+
+    }
 
     @Override
     public int describeContents() {
