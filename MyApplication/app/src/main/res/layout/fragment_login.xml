@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@android:color/transparent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:background="@color/transparent_black_percent_50">
+
+    <TextView
+        android:id="@+id/fl_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:gravity="center"
+        android:textColor="@color/transparent_white_percent_75"
+        android:text="@string/login"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+    <TextView
+        android:id="@+id/fl_tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/transparent_white_percent_50"
+        android:text="@string/username"
+
+        />
+    <EditText
+        android:id="@+id/fl_et_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/transparent_white_percent_25"
+        android:hint="@string/enter_username"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp">
+    <TextView
+        android:id="@+id/fl_tv_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/transparent_white_percent_50"
+        android:text="@string/username"
+        android:layout_marginTop="4dp"
+        />
+    <EditText
+        android:id="@+id/fl_et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/transparent_white_percent_25"
+        android:hint="@string/enter_username"
+        android:inputType="textPassword"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/fl_btn_go"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/go"
+        android:textColor="@color/white"
+        android:background="@color/transparent_black_percent_25"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>
