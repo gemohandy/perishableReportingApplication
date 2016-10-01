@@ -1,0 +1,9 @@
+main{
+  text-align:center;
+  width:100%;
+}
+img#banner{
+  display:block;
+    margin:auto;
+  width:1200px;
+}
