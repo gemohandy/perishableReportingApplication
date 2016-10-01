@@ -72,11 +72,15 @@ public class GridMenuFragment extends Fragment implements AdapterView.OnItemClic
 
     public void setOrders(ArrayList<Order> orders) {
         this.orders = orders;
-        adapter.setOrders(orders);
+        if (adapter != null) {
+            adapter.setOrders(orders);
+        }
     }
 
     public void setReservations(ArrayList<Reservation> reservations) {
         this.reservations = reservations;
-        adapter.setReservations(reservations);
+        if (adapter != null) {
+            adapter.setReservations(reservations);
+        }
     }
 }

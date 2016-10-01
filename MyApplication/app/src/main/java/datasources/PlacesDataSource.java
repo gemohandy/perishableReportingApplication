@@ -84,7 +84,7 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
             transport = new NetHttpTransport();
             content = new JsonHttpContent(new JacksonFactory(), insertData);
             HttpRequestFactory factory = transport.createRequestFactory();
-
+            Log.i("Places", insertData);
             request = factory.buildPostRequest(new GenericUrl(API_BASE), content);
             request.getUrl().putAll(getParams());
             resp = request.execute();

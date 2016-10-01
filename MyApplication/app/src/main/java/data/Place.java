@@ -4,14 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Place implements Parcelable{
-    private int Id = -1;
+    private Integer Id = -1;
     private String Name = "";
-    private String Phone = "";
-    private String Email = "";
+    private String Phone = null;
+    private String Email = null;
     private String Address = "";
-    private String City = "";
-    private String Province = "";
-    private String Country = "";
+    private String City = null;
+    private String Province = null;
+    private String Country = null;
 
 
     public Place() {}
@@ -19,24 +19,14 @@ public class Place implements Parcelable{
     protected Place(Parcel in) {
         Id = in.readInt();
         Name = in.readString();
-        Phone = in.readString();
-        Email = in.readString();
         Address = in.readString();
-        City = in.readString();
-        Province = in.readString();
-        Country = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(Id);
         dest.writeString(Name);
-        dest.writeString(Phone);
-        dest.writeString(Email);
         dest.writeString(Address);
-        dest.writeString(City);
-        dest.writeString(Province);
-        dest.writeString(Country);
     }
 
     @Override
@@ -56,11 +46,11 @@ public class Place implements Parcelable{
         }
     };
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         Id = id;
     }
 

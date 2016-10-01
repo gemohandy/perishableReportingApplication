@@ -77,12 +77,15 @@ public class RegisterPlaceFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        data.Place p = new data.Place();
-        p.setName(etName.getText().toString());
-        p.setAddress(place.getAddress().toString());
-        p.setCity(place.getLocale().toString());
-        RegisterFragment rF = RegisterFragment.newInstance(p);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, rF, rF.getTag()).addToBackStack(rF.getTag()).commitAllowingStateLoss();
+        if (!actv.getText().toString().equals("") && !etName.getText().toString().equals("")) {
+            data.Place p = new data.Place();
+            p.setName(etName.getText().toString());
+//        p.setAddress(place.getAddress().toString());
+//        p.setCity(place.getLocale().toString());
+            p.setAddress(actv.getText().toString());
+            RegisterFragment rF = RegisterFragment.newInstance(p);
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, rF, rF.getTag()).addToBackStack(rF.getTag()).commitAllowingStateLoss();
+        }
     }
 
     @Override

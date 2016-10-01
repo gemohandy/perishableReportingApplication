@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class OrderItem implements Parcelable {
-    private int Id = -1;
+    private Integer Id = -1;
     private String Name = "";
     private int Quantity = 0;
     private int fk_OrderID = -1;
@@ -46,11 +46,11 @@ public class OrderItem implements Parcelable {
         }
     };
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         Id = id;
     }
 

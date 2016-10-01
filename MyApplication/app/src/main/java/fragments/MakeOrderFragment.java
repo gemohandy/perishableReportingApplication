@@ -94,17 +94,20 @@ public class MakeOrderFragment extends Fragment implements View.OnClickListener,
                 break;
             case R.id.fmo_btn_add_whole_order:
                 Order order = new Order();
-                OrderDataSource ods = new OrderDataSource();
-                OrderItemsDataSource oids = new OrderItemsDataSource();
+//                OrderDataSource ods = new OrderDataSource();
+//                OrderItemsDataSource oids = new OrderItemsDataSource();
                 order.setDateTime(order.getSdf().format(Calendar.getInstance().getTime()));
                 order.setActive(true);
                 order.setItems(addedAdapter.getItems());
-                int id = ods.insertOrderData(order);
-                order.setId(id);
-                order.updateForeignKeys();
-                oids.insertOrderItemData(order.getItems());
+//                int id = ods.insertOrderData(order);
+//                order.setId(id);
+//                order.updateForeignKeys();
+//                oids.insertOrderItemData(order.getItems());
                 Intent updateIntent = new Intent();
                 updateIntent.setAction("update");
+                Bundle b = new Bundle();
+                b.putParcelable("order", order);
+                updateIntent.putExtra("bundle", b);
                 getActivity().sendBroadcast(updateIntent);
                 getActivity().getSupportFragmentManager().popBackStack();
                 break;

@@ -6,11 +6,11 @@ import android.os.Parcelable;
 import java.text.SimpleDateFormat;
 
 public class Reservation implements Parcelable {
-    private int Id= -1;
+    private Integer Id= -1;
     private String DateTime = "";
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hhh-mm-ss");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
     private boolean isActive = false;
-    private int fk_CharityID = -1;
+    private Integer fk_CharityID = -1;
     private int fk_OrderID = -1;
 
     public Reservation(Parcel in) {
@@ -51,11 +51,11 @@ public class Reservation implements Parcelable {
         parcel.writeInt(fk_OrderID);
     }
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         Id = id;
     }
 
@@ -83,11 +83,11 @@ public class Reservation implements Parcelable {
         isActive = active;
     }
 
-    public int getFk_CharityID() {
+    public Integer getFk_CharityID() {
         return fk_CharityID;
     }
 
-    public void setFk_CharityID(int fk_CharityID) {
+    public void setFk_CharityID(Integer fk_CharityID) {
         this.fk_CharityID = fk_CharityID;
     }
 

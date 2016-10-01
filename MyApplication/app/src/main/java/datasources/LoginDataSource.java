@@ -30,7 +30,7 @@ import interfaces.JsonIF;
 import interfaces.SpecifiedObjectType;
 
 public class LoginDataSource extends NetworkDataSource implements JsonIF, SpecifiedObjectType {
-    private static final String API_BASE = "http://perishableapp20160930072857.azurewebsites.net/api/tblLogin";
+    private static final String API_BASE = "http://perishableapp20160930072857.azurewebsites.net/api/tblLogins";
 
     public LoginDataSource() {
     }

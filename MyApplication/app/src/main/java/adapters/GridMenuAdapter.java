@@ -34,7 +34,7 @@ public class GridMenuAdapter extends BaseAdapter {
         populate();
     }
 
-    public GridMenuAdapter(Context activity, ArrayList<Order> orders, ArrayList<Reservation> reservations) {
+    public GridMenuAdapter(Context context, ArrayList<Order> orders, ArrayList<Reservation> reservations) {
         this.context = context;
         this.orders = orders;
         this.reservations = reservations;

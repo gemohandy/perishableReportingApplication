@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
@@ -39,9 +40,13 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         bind();
         try {
             registerReceiver(receiver, getBRIntentFilter());
+            Intent i = new Intent();
+            i.setAction("update");
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -100,6 +105,13 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+    public void refreshData(Order order) {
+        OrderDataSource ods = new OrderDataSource();
+        ReservationDataSource rds = new ReservationDataSource();
+            orders.add(order);
+        gmFrag.setOrders(orders);
+    }
+
     public IntentFilter getBRIntentFilter(){
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("update");
@@ -109,13 +121,22 @@ public class MainActivity extends FragmentActivity {
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Order order = null;
             if (intent != null) {
+                if (intent.getBundleExtra("bundle") != null) {
+                    Bundle b = intent.getBundleExtra("bundle");
+                    order = b.getParcelable("order");
+                }
                 if (intent.getAction().equals("update")) {
+                    final Order finalOrder = order;
                     AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
                         @Override
                         protected Void doInBackground(Void... voids) {
-                            refreshData();
-
+                            if (finalOrder != null) {
+                                refreshData(finalOrder);
+                            } else {
+                                refreshData();
+                            }
                             return null;
                         }
                     }.execute();

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import adapters.ReserveOrderGridAdapter;
 import ca.team5.perishablereportingapplication.R;
 import data.Order;
-import datasources.OrderDataSource;
 
 public class ReserveOrderFragment extends Fragment implements AdapterView.OnItemClickListener {
 
@@ -66,7 +65,9 @@ public class ReserveOrderFragment extends Fragment implements AdapterView.OnItem
         this.orders = orders;
         getArguments().clear();
         getArguments().putParcelableArrayList("orders", orders);
-        adapter.setOrders(orders);
+        if (adapter != null) {
+            adapter.setOrders(orders);
+        }
 
     }
 }

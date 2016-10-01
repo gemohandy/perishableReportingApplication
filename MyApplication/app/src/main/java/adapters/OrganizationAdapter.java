@@ -4,13 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import ca.team5.perishablereportingapplication.R;
 
-public class OrganizationAdapter extends ArrayAdapter<String> {
+public class OrganizationAdapter extends ArrayAdapter<String> implements AdapterView.OnItemSelectedListener{
     private Context context;
+    private int selectedIndex = 0;
 
     public OrganizationAdapter(Context context) {
         super(context, R.layout.item_fmo_list);
@@ -53,5 +55,19 @@ public class OrganizationAdapter extends ArrayAdapter<String> {
         TextView tv = (TextView)convertView.findViewById(R.id.io_tv_text);
         tv.setText(getItemAt(position));
         return convertView;
+    }
+
+    public int getSelectedIndex() {
+        return selectedIndex;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        selectedIndex = i;
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        selectedIndex = 0;
     }
 }

@@ -7,9 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Order implements Parcelable {
-    private int Id = -1;
+    private Integer Id = -1;
     private String DateTime = "";
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hhh-mm-ss");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
     private boolean isActive = false;
     private int fk_CompanyID = -1;
     private ArrayList<OrderItem> items = new ArrayList<>();
@@ -52,11 +52,11 @@ public class Order implements Parcelable {
         }
     };
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         Id = id;
     }
 

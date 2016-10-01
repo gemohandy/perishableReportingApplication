@@ -36,6 +36,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private Button btnRegister;
     private OrganizationAdapter adapter;
     private Place place;
+    private String dropDownSelection ="";
     public static RegisterFragment newInstance(Place place) {
         RegisterFragment rFrag = new RegisterFragment();
         Bundle b = new Bundle();
@@ -70,6 +71,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             btnRegister = (Button)getView().findViewById(R.id.fr_btn_register);
             adapter = new OrganizationAdapter(getActivity());
             spOrg.setAdapter(adapter);
+            spOrg.setOnItemSelectedListener(adapter);
             btnRegister.setOnClickListener(this);
         }
     }
@@ -84,22 +86,33 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             login.setEmail(etEmail.getText().toString());
             login.setPhone(etPhone.getText().toString());
             PlacesDataSource pds =new PlacesDataSource();
+            place.setId(null);
             int pId = pds.insertPlace(place);
-            if (spOrg.getSelectedItem().toString().equals("Business")) {
-                Company company = new Company();
-                CompanyDatasource cds = new CompanyDatasource();
-                company.setFk_PlaceID(pId);
-                int cId = cds.insertCompany(company);
-                login.setFk_CompanyID(cId);
-
-            } else {
-                Charity charity = new Charity();
-                CharityDatasource cds = new CharityDatasource();
-                charity.setFk_PlaceID(pId);
-                int cId = cds.insertCharity(charity);
-                login.setFk_CharityID(cId);
+            if (adapter.getSelectedIndex() != 0) {
+                switch (adapter.getSelectedIndex()) {
+                    case 1:
+                        Charity charity = new Charity();
+                        CharityDatasource chds = new CharityDatasource();
+                        charity.setFk_PlaceID(pId);
+                        charity.setId(null);
+                        int chid = chds.insertCharity(charity);
+                        login.setFk_CharityID(chid);
+                        login.setFk_CompanyID(null);
+                        break;
+                    case 2:
+                        Company company = new Company();
+                        CompanyDatasource cds = new CompanyDatasource();
+                        company.setFk_PlaceID(pId);
+                        company.setId(null);
+                        int cId = cds.insertCompany(company);
+                        login.setFk_CompanyID(cId);
+                        login.setFk_CharityID(null);
+                        break;
+                }
             }
+
             LoginDataSource lds = new LoginDataSource();
+            login.setId(null);
             lds.insertLoginData(login);
             PreferencesApplication app = (PreferencesApplication)getActivity().getApplication();
             SharedPreferences.Editor editor = app.getPreferences(getActivity()).edit();
@@ -108,6 +121,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             editor.putBoolean("loggedIn", true);
             editor.commit();
             getActivity().getSupportFragmentManager().popBackStack();
+            getActivity().getSupportFragmentManager().popBackStack();
+
         }
     }
 
