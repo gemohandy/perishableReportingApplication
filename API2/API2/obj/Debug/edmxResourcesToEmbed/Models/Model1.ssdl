@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbPerishableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblCharity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fk_PlaceID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblCompany">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fk_PlaceID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblLogin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="150" />
+    <Property Name="PasswordHash" Type="varchar(max)" />
+    <Property Name="fk_CompanyID" Type="int" />
+    <Property Name="fk_CharityID" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="75" />
+    <Property Name="Phone" Type="varchar" MaxLength="10" />
+    <Property Name="Email" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tblOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
+    <Property Name="isActive" Type="bit" Nullable="false" />
+    <Property Name="fk_CompanyID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblOrderItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="fk_OrderID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblPlace">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="10" />
+    <Property Name="Email" Type="varchar" MaxLength="75" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+    <Property Name="City" Type="varchar" MaxLength="75" />
+    <Property Name="Province" Type="varchar" MaxLength="2" />
+    <Property Name="Country" Type="varchar" MaxLength="75" />
+  </EntityType>
+  <EntityType Name="tblReservation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
+    <Property Name="isActive" Type="bit" Nullable="false" />
+    <Property Name="fk_OrderID" Type="int" Nullable="false" />
+    <Property Name="fk_CharityID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tblCharity_tblPlace">
+    <End Role="tblPlace" Type="Self.tblPlace" Multiplicity="1" />
+    <End Role="tblCharity" Type="Self.tblCharity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPlace">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblCharity">
+        <PropertyRef Name="fk_PlaceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCompany_tblPlace">
+    <End Role="tblPlace" Type="Self.tblPlace" Multiplicity="1" />
+    <End Role="tblCompany" Type="Self.tblCompany" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPlace">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblCompany">
+        <PropertyRef Name="fk_PlaceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLogin_tblCharity">
+    <End Role="tblCharity" Type="Self.tblCharity" Multiplicity="0..1" />
+    <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCharity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblLogin">
+        <PropertyRef Name="fk_CharityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLogin_tblCompany">
+    <End Role="tblCompany" Type="Self.tblCompany" Multiplicity="0..1" />
+    <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCompany">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblLogin">
+        <PropertyRef Name="fk_CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblOrder_tblCompany">
+    <End Role="tblCompany" Type="Self.tblCompany" Multiplicity="1" />
+    <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCompany">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblOrder">
+        <PropertyRef Name="fk_CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblOrderItem_tblOrder">
+    <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="1" />
+    <End Role="tblOrderItem" Type="Self.tblOrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblOrderItem">
+        <PropertyRef Name="fk_OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblReservation_tblCharity">
+    <End Role="tblCharity" Type="Self.tblCharity" Multiplicity="1" />
+    <End Role="tblReservation" Type="Self.tblReservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCharity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblReservation">
+        <PropertyRef Name="fk_CharityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblReservation_tblOrder">
+    <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="1" />
+    <End Role="tblReservation" Type="Self.tblReservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblReservation">
+        <PropertyRef Name="fk_OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbPerishableModelStoreContainer">
+    <EntitySet Name="tblCharity" EntityType="Self.tblCharity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCompany" EntityType="Self.tblCompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLogin" EntityType="Self.tblLogin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblOrder" EntityType="Self.tblOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblOrderItem" EntityType="Self.tblOrderItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPlace" EntityType="Self.tblPlace" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReservation" EntityType="Self.tblReservation" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblCharity_tblPlace" Association="Self.FK_tblCharity_tblPlace">
+      <End Role="tblPlace" EntitySet="tblPlace" />
+      <End Role="tblCharity" EntitySet="tblCharity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCompany_tblPlace" Association="Self.FK_tblCompany_tblPlace">
+      <End Role="tblPlace" EntitySet="tblPlace" />
+      <End Role="tblCompany" EntitySet="tblCompany" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLogin_tblCharity" Association="Self.FK_tblLogin_tblCharity">
+      <End Role="tblCharity" EntitySet="tblCharity" />
+      <End Role="tblLogin" EntitySet="tblLogin" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLogin_tblCompany" Association="Self.FK_tblLogin_tblCompany">
+      <End Role="tblCompany" EntitySet="tblCompany" />
+      <End Role="tblLogin" EntitySet="tblLogin" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblOrder_tblCompany" Association="Self.FK_tblOrder_tblCompany">
+      <End Role="tblCompany" EntitySet="tblCompany" />
+      <End Role="tblOrder" EntitySet="tblOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblOrderItem_tblOrder" Association="Self.FK_tblOrderItem_tblOrder">
+      <End Role="tblOrder" EntitySet="tblOrder" />
+      <End Role="tblOrderItem" EntitySet="tblOrderItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblReservation_tblCharity" Association="Self.FK_tblReservation_tblCharity">
+      <End Role="tblCharity" EntitySet="tblCharity" />
+      <End Role="tblReservation" EntitySet="tblReservation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblReservation_tblOrder" Association="Self.FK_tblReservation_tblOrder">
+      <End Role="tblOrder" EntitySet="tblOrder" />
+      <End Role="tblReservation" EntitySet="tblReservation" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
