@@ -8,26 +8,32 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import ca.team5.perishablereportingapplication.R;
+import fragments.LoginFragment;
 
 public class GridMenuAdapter extends BaseAdapter {
     private Context context = null;
-
+    private ArrayList<Fragment> fragments = new ArrayList<>();
     public GridMenuAdapter(Context context) {
         this.context = context;
+        populate();
     }
+
+    private void populate() {
+        LoginFragment loginFragment = LoginFragment.newInstance();
+        fragments.add(loginFragment);
+    }
+
     @Override
     public int getCount() {
-        return 1;
+        return fragments.size();
     }
 
     @Override
     public Fragment getItem(int i) {
-        switch (i) {
-            case 0:
-                break;
-        }
-        return null;
+        return fragments.get(i);
     }
 
     @Override
@@ -40,7 +46,16 @@ public class GridMenuAdapter extends BaseAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
         view = inflater.inflate(R.layout.item_grid_menu, viewGroup, false);
         TextView tvTitle = (TextView)view.findViewById(R.id.igm_tv_title);
-
+        tvTitle.setText(getTitle(i));
         return view;
+    }
+
+    public String getTitle(int pos) {
+        switch (pos) {
+            case 0:
+                return "Login";
+            default:
+                return "";
+        }
     }
 }
