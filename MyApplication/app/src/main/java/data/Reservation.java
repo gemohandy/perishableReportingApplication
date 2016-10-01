@@ -13,7 +13,7 @@ public class Reservation implements Parcelable {
     private int fk_CharityID = -1;
     private int fk_OrderID = -1;
 
-    protected Reservation(Parcel in) {
+    public Reservation(Parcel in) {
         Id = in.readInt();
         DateTime = in.readString();
         isActive = in.readByte() != 0;
@@ -32,6 +32,10 @@ public class Reservation implements Parcelable {
             return new Reservation[size];
         }
     };
+
+    public Reservation() {
+
+    }
 
     @Override
     public int describeContents() {

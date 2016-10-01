@@ -13,7 +13,7 @@ public class Login implements Parcelable {
     private int fk_CompanyID = -1;
     private int fk_CharityID = -1;
 
-    protected Login(Parcel in) {
+    public Login(Parcel in) {
         Id = in.readInt();
         Username = in.readString();
         Password = in.readString();
@@ -35,6 +35,10 @@ public class Login implements Parcelable {
             return new Login[size];
         }
     };
+
+    public Login() {
+
+    }
 
     @Override
     public int describeContents() {

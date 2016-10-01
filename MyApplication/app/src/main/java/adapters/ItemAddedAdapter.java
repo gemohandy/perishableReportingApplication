@@ -20,6 +20,13 @@ public class ItemAddedAdapter extends BaseAdapter {
         super();
         this.context = context;
     }
+
+    public ItemAddedAdapter(Context context, ArrayList<OrderItem> items) {
+        super();
+        this.context = context;
+        this.items = items;
+    }
+
     @Override
     public int getCount() {
         return items.size();

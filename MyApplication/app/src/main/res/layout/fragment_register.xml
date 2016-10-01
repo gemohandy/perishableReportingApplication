@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:background="@color/transparent_black_percent_50">
+
+    <TextView
+        android:id="@+id/fr_register_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="@string/register"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:minHeight="40dp"
+        android:weightSum="1">
+        <TextView
+            android:id="@+id/fr_tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight=".67"
+            android:gravity="center"
+            android:text="@string/name"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/fr_et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:hint="@string/enter_name"
+            android:inputType="textPassword"
+            android:padding="4dp"
+            android:textColor="@color/white"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:textColorHint="@color/transparent_white_percent_75" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:minHeight="40dp"
+        android:weightSum="1">
+        <TextView
+            android:id="@+id/fr_tv_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight=".67"
+            android:gravity="center"
+            android:text="@string/username"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/fr_et_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:hint="@string/enter_username"
+            android:inputType="textPassword"
+            android:padding="4dp"
+            android:textColor="@color/white"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:textColorHint="@color/transparent_white_percent_75" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:minHeight="40dp"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/fr_tv_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight=".67"
+            android:gravity="center"
+            android:text="@string/password"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/fr_et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:hint="@string/enter_password"
+            android:inputType="textPassword"
+            android:padding="4dp"
+            android:textColor="@color/white"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:textColorHint="@color/transparent_white_percent_75" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:minHeight="40dp"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/fr_tv_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight=".67"
+            android:gravity="center"
+            android:text="@string/confirm_password"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/fr_et_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:hint="@string/enter_password"
+            android:inputType="textPassword"
+            android:padding="4dp"
+            android:textColor="@color/white"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:textColorHint="@color/transparent_white_percent_75" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:minHeight="40dp"
+        android:weightSum="1">
+        <TextView
+            android:id="@+id/fr_tv_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight=".67"
+            android:gravity="center"
+            android:text="@string/phone_number"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/fr_et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:hint="@string/enter_your_phone_number"
+            android:padding="4dp"
+            android:textColor="@color/white"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:textColorHint="@color/transparent_white_percent_75" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:minHeight="40dp"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/fr_tv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight=".67"
+            android:gravity="center"
+            android:text="@string/email"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/fr_et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:hint="@string/enter_email"
+            android:padding="4dp"
+            android:textColor="@color/white"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/transparent_white_percent_75" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:minHeight="40dp"
+        android:weightSum="1">
+        <TextView
+            android:id="@+id/fr_tv_organization"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight=".67"
+            android:gravity="center"
+            android:text="@string/org_type"
+            android:textColor="@color/white" />
+        <Spinner
+            android:id="@+id/fr_sp_org"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:padding="4dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/fr_btn_register"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/sign_up"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/transparent_black_percent_25"
+        android:textColor="@color/white"
+        />
+</LinearLayout>

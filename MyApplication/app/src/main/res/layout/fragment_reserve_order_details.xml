@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/frod_company_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:textSize="14sp"/>
+    <ListView
+        android:id="@+id/frod_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".8"
+        android:divider="@color/transparent_white_percent_50"
+        android:dividerHeight="2dp"></ListView>
+    <Button
+        android:id="@+id/frod_btn_reserve"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:padding="8dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/reserve"/>
+</LinearLayout>
