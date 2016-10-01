@@ -15,7 +15,7 @@
         android:padding="8dp"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:text="@string/login"/>
 
     <LinearLayout
@@ -73,7 +73,9 @@
         android:padding="4dp"
         android:layout_gravity="center_horizontal"
         android:text="@string/go"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:textColor="@color/white"
-        android:background="@color/transparent_black_percent_25"
+        android:background="@color/transparent_black_percent_50"
         android:layout_marginTop="20dp"/>
 </LinearLayout>

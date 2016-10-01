@@ -57,7 +57,7 @@ public class MakeOrderFragment extends Fragment implements View.OnClickListener,
             etQuantity = (EditText)getView().findViewById(R.id.fmo_et_qnty);
             btnAddItem = (Button)getView().findViewById(R.id.fmo_btn_add_item);
             btnAddOrder = (Button)getView().findViewById(R.id.fmo_btn_add_whole_order);
-            adapter = new OrderItemAdapter(getActivity());
+            adapter = new OrderItemAdapter(getActivity(), gridView);
             addedAdapter = new ItemAddedAdapter(getActivity());
             gridView.setAdapter(adapter);
             listView.setAdapter(addedAdapter);

@@ -17,6 +17,7 @@ import fragments.LoginFragment;
 import fragments.MakeOrderFragment;
 import fragments.RegisterFragment;
 import fragments.ReserveOrderFragment;
+import fragments.ReviewReservedOrdersFragment;
 
 public class GridMenuAdapter extends BaseAdapter {
     private Context context = null;
@@ -31,10 +32,12 @@ public class GridMenuAdapter extends BaseAdapter {
         MakeOrderFragment makeOrderFragment = MakeOrderFragment.newInstance();
         ReserveOrderFragment roFrag = ReserveOrderFragment.newInstance();
         RegisterFragment rFr = RegisterFragment.newInstance();
+        ReviewReservedOrdersFragment rrofr = ReviewReservedOrdersFragment.newInstance();
         fragments.add(loginFragment);
         fragments.add(rFr);
         fragments.add(makeOrderFragment);
         fragments.add(roFrag);
+        fragments.add(rrofr);
 
 
     }
@@ -75,6 +78,8 @@ public class GridMenuAdapter extends BaseAdapter {
                 return context.getDrawable(R.drawable.paperwithcheck);
             case 3:
                 return context.getDrawable(R.drawable.canned);
+            case 4:
+                return context.getDrawable(R.drawable.review);
             default:
                 return context.getDrawable(R.drawable.canned);
         }
@@ -89,6 +94,8 @@ public class GridMenuAdapter extends BaseAdapter {
                 return "Make Order";
             case 3:
                 return "Reserve Order";
+            case 4:
+                return "Review Orders";
             default:
                 return "";
         }

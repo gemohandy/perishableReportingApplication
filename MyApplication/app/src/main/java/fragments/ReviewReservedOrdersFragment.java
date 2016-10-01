@@ -8,26 +8,24 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import adapters.ReserveOrderGridAdapter;
+import adapters.GridViewReviewAdapter;
 import ca.team5.perishablereportingapplication.R;
 import data.Order;
 
-public class ReserveOrderFragment extends Fragment implements AdapterView.OnItemClickListener {
-
+public class ReviewReservedOrdersFragment extends Fragment implements AdapterView.OnItemClickListener {
     private GridView gridView;
-    private ReserveOrderGridAdapter adapter;
+    private GridViewReviewAdapter adapter;
 
-    public static ReserveOrderFragment newInstance() {
-        ReserveOrderFragment rof = new ReserveOrderFragment();
-
-        return rof;
+    public static ReviewReservedOrdersFragment newInstance() {
+        ReviewReservedOrdersFragment rrof = new ReviewReservedOrdersFragment();
+        return rrof;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reserve_order, container, false);
+        return inflater.inflate(R.layout.fragment_review_reserved_orders, container, false);
     }
 
     @Override
@@ -38,8 +36,8 @@ public class ReserveOrderFragment extends Fragment implements AdapterView.OnItem
 
     private void bind() {
         if (getActivity() != null) {
-            gridView = (GridView)getView().findViewById(R.id.fro_gridview);
-            adapter = new ReserveOrderGridAdapter(getActivity());
+            gridView = (GridView)getView().findViewById(R.id.frro_gridview);
+            adapter = new GridViewReviewAdapter(getActivity());
             gridView.setAdapter(adapter);
             gridView.setOnItemClickListener(this);
         }
@@ -47,7 +45,7 @@ public class ReserveOrderFragment extends Fragment implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Order temp = adapter.getItem(i);
+        Order temp = adapter.getOrders().get(i);
         ReserveOrderOrderDetailsFragment rof = ReserveOrderOrderDetailsFragment.newInstance(temp);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, rof, rof.getTag()).addToBackStack(rof.getTag()).commitAllowingStateLoss();
     }

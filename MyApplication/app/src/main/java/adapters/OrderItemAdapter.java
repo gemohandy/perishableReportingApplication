@@ -2,6 +2,7 @@ package adapters;
 
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
+import android.support.v17.leanback.widget.HorizontalGridView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +19,11 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
     private Context context;
     private ArrayList<OrderItemPreset> presets = new ArrayList<>();
     private int selectedIndex = -1;
-    public OrderItemAdapter(Context context) {
+    private HorizontalGridView gridView;
+    public OrderItemAdapter(Context context, HorizontalGridView gridView) {
         super();
         this.context = context;
+        this.gridView = gridView;
         populatePresets();
     }
 
@@ -49,6 +52,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
             public void onClick(View view) {
                 selectedIndex = position;
                 notifyDataSetChanged();
+                gridView.setSelectedPosition(selectedIndex);
             }
         });
     }
