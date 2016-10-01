@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:gravity="center"
-        android:textColor="@color/transparent_white_percent_75"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         android:text="@string/login"/>
 
     <LinearLayout
@@ -26,7 +27,7 @@
         android:id="@+id/fl_tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/transparent_white_percent_50"
+        android:textColor="@color/white"
         android:text="@string/username"
 
         />
@@ -48,8 +49,8 @@
         android:id="@+id/fl_tv_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/transparent_white_percent_50"
-        android:text="@string/username"
+        android:textColor="@color/white"
+        android:text="@string/password"
         android:layout_marginTop="4dp"
         />
     <EditText
@@ -59,7 +60,7 @@
         android:padding="4dp"
         android:textColor="@color/white"
         android:textColorHint="@color/transparent_white_percent_25"
-        android:hint="@string/enter_username"
+        android:hint="@string/enter_password"
         android:inputType="textPassword"/>
     </LinearLayout>
 
