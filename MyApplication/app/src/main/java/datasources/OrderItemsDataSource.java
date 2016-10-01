@@ -23,18 +23,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.Place;
-import data.Reservation;
+import data.Order;
+import data.OrderItem;
 import interfaces.JsonIF;
 import interfaces.SpecifiedObjectType;
 
-/**
- * Not the Google Places Kind
- */
-public class PlacesDataSource extends NetworkDataSource implements JsonIF, SpecifiedObjectType {
-    private static final String API_BASE = "http://perishableapp20160930072857.azurewebsites.net/api/tblPlaces";
-    private ArrayList<Place> places = new ArrayList<>();
-
+public class OrderItemsDataSource extends NetworkDataSource implements JsonIF, SpecifiedObjectType {
+    private static final String API_BASE = "http://perishableapp20160930072857.azurewebsites.net/api/tblOrderItems";
+    private ArrayList<OrderItem> items = new ArrayList<>();
     @Override
     public ArrayList<Object> getHttpGETInputStream() throws IOException {
         ArrayList<Object> objects = new ArrayList<>();
@@ -70,9 +66,10 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
         transport.shutdown();
         return objects;
     }
-    public void insertPlace(Place place) {
+
+    public void insertOrderItemData(OrderItem orderItem) {
         Gson gson = new Gson();
-        String insertData = gson.toJson(place);
+        String insertData = gson.toJson(orderItem);
         InputStream is = null;
         NetHttpTransport transport = null;
         HttpRequest request = null;
@@ -90,7 +87,8 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
             is = resp.getContent();
             if (is != null) {
                 respCont = getJSONFromInputStream(is);
-                Log.i("LoginDS", respCont);
+                Log.i("OIDS", respCont);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,18 +142,23 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
 
     @Override
     public Object processJsonObject(JSONObject jo) throws JSONException {
-        Place place = new Place();
-        if (jo.has("Id") && !jo.isNull("Id")){
-            place.setId(jo.getInt("Id"));
-        }
+        OrderItem item = new OrderItem();
         if (jo.has("Name") && !jo.isNull("Name")) {
-            place.setName(jo.getString("Name"));
+            item.setName(jo.getString("Name"));
         }
-        if (jo.has("Address") && !jo.isNull("Address")) {
-            place.setAddress(jo.getString("Address"));
+        if (jo.has("Quantity") && !jo.isNull("Quantity")) {
+            item.setQuantity(jo.getInt("Quantity"));
         }
-        return place;
+        if (jo.has("fk_OrderID") && !jo.isNull("fk_OrderID")) {
+            item.setFk_OrderID(jo.getInt("fk_OrderID"));
+        }
+        if (jo.has("Id") && !jo.isNull("Id")) {
+            item.setId(jo.getInt("Id"));
+        }
+        return item;
     }
+
+
 
     @Override
     public List<Object> getData() {
@@ -171,8 +174,8 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
 
     @Override
     public void addSpecifiedObjectTypeLocally(Object object) {
-        if (object instanceof Place) {
-            places.add((Place) object);
+        if (object instanceof OrderItem) {
+            items.add((OrderItem)object);
         }
     }
 }

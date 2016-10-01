@@ -16,6 +16,7 @@ import ca.team5.perishablereportingapplication.R;
 import fragments.LoginFragment;
 import fragments.MakeOrderFragment;
 import fragments.RegisterFragment;
+import fragments.RegisterPlaceFragment;
 import fragments.ReserveOrderFragment;
 import fragments.ReviewReservedOrdersFragment;
 
@@ -31,7 +32,7 @@ public class GridMenuAdapter extends BaseAdapter {
         LoginFragment loginFragment = LoginFragment.newInstance();
         MakeOrderFragment makeOrderFragment = MakeOrderFragment.newInstance();
         ReserveOrderFragment roFrag = ReserveOrderFragment.newInstance();
-        RegisterFragment rFr = RegisterFragment.newInstance();
+        RegisterPlaceFragment rFr = RegisterPlaceFragment.newInstance();
         ReviewReservedOrdersFragment rrofr = ReviewReservedOrdersFragment.newInstance();
         fragments.add(loginFragment);
         fragments.add(rFr);

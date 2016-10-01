@@ -22,7 +22,7 @@
             android:gravity="center"
             android:text="Add Order Items"
             android:textColor="@color/transparent_white_percent_80"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <android.support.v17.leanback.widget.HorizontalGridView

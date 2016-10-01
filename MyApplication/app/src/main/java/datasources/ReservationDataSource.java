@@ -23,18 +23,15 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.Place;
+import data.Order;
+import data.OrderItem;
 import data.Reservation;
 import interfaces.JsonIF;
 import interfaces.SpecifiedObjectType;
 
-/**
- * Not the Google Places Kind
- */
-public class PlacesDataSource extends NetworkDataSource implements JsonIF, SpecifiedObjectType {
-    private static final String API_BASE = "http://perishableapp20160930072857.azurewebsites.net/api/tblPlaces";
-    private ArrayList<Place> places = new ArrayList<>();
-
+public class ReservationDataSource extends NetworkDataSource implements JsonIF, SpecifiedObjectType {
+    private static final String API_BASE = "http://perishableapp20160930072857.azurewebsites.net/api/tblReservations";
+    private ArrayList<Reservation> reservations = new ArrayList<>();
     @Override
     public ArrayList<Object> getHttpGETInputStream() throws IOException {
         ArrayList<Object> objects = new ArrayList<>();
@@ -70,9 +67,10 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
         transport.shutdown();
         return objects;
     }
-    public void insertPlace(Place place) {
+
+    public void insertReservationData(Reservation reservation) {
         Gson gson = new Gson();
-        String insertData = gson.toJson(place);
+        String insertData = gson.toJson(reservation);
         InputStream is = null;
         NetHttpTransport transport = null;
         HttpRequest request = null;
@@ -144,24 +142,29 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
 
     @Override
     public Object processJsonObject(JSONObject jo) throws JSONException {
-        Place place = new Place();
-        if (jo.has("Id") && !jo.isNull("Id")){
-            place.setId(jo.getInt("Id"));
+        Reservation reservation = new Reservation();
+        if (jo.has("Id") && !jo.isNull("Id")) {
+            reservation.setId(jo.getInt("Id"));
         }
-        if (jo.has("Name") && !jo.isNull("Name")) {
-            place.setName(jo.getString("Name"));
+        if (jo.has("isActive") && !jo.isNull("isActive")) {
+            reservation.setActive(jo.getBoolean("isActive"));
         }
-        if (jo.has("Address") && !jo.isNull("Address")) {
-            place.setAddress(jo.getString("Address"));
+        if (jo.has("DateTime") && !jo.isNull("DateTime")) {
+            reservation.setDateTime(jo.getString("DateTime"));
         }
-        return place;
+        if (jo.has("fk_CharityID") && !jo.isNull("fk_CharityID")) {
+            reservation.setFk_CharityID(jo.getInt("fk_CharityID"));
+        }
+        if (jo.has("fk_OrderID") && !jo.isNull("fk_OrderID")) {
+            reservation.setFk_OrderID(jo.getInt("fk_OrderID"));
+        }
+        return reservation;
     }
 
     @Override
     public List<Object> getData() {
         return null;
     }
-
     @Override
     public void addSpecifiedObjectTypeLocally(ArrayList<Object> objects) {
         for (Object o : objects) {
@@ -171,8 +174,8 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
 
     @Override
     public void addSpecifiedObjectTypeLocally(Object object) {
-        if (object instanceof Place) {
-            places.add((Place) object);
+        if (object instanceof Reservation) {
+            reservations.add((Reservation) object);
         }
     }
 }

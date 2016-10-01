@@ -13,18 +13,9 @@ import android.widget.Spinner;
 import adapters.OrganizationAdapter;
 import ca.team5.perishablereportingapplication.R;
 import data.Login;
+import data.Place;
 
 public class RegisterFragment extends Fragment implements View.OnClickListener {
-    /*
-       private int Id = -1;
-    private String Username = "";
-    private String Password = "";
-    private String Name = "";
-    private String Phone = "";
-    private String Email = "";
-    private int fk_CompanyID = -1;
-    private int fk_CharityID = -1;
-     */
     private EditText etUsername;
     private EditText etPassword;
     private EditText etName;
@@ -34,8 +25,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private EditText etConfirmPassword;
     private Button btnRegister;
     private OrganizationAdapter adapter;
-    public static RegisterFragment newInstance() {
+    private Place place;
+    public static RegisterFragment newInstance(Place place) {
         RegisterFragment rFrag = new RegisterFragment();
+        Bundle b = new Bundle();
+        b.putParcelable("place", place);
+        rFrag.setArguments(b);
         return rFrag;
     }
 
@@ -49,6 +44,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, Bundle savedInstance) {
         super.onViewCreated(view, savedInstance);
+        place = getArguments().getParcelable("place");
         bind();
     }
 
@@ -77,6 +73,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             login.setPassword(etPassword.getText().toString());
             login.setEmail(etEmail.getText().toString());
             login.setPhone(etPhone.getText().toString());
+            //TODO send upstream with place
         }
     }
 

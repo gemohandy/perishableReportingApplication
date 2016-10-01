@@ -3,7 +3,14 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
+
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
+
     defaultConfig {
+        multiDexEnabled true
+
         applicationId "ca.team5.perishablereportingapplication"
         minSdkVersion 17
         targetSdkVersion 24
@@ -28,5 +35,7 @@ dependencies {
     compile 'com.android.support:design:24.2.1'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:leanback-v17:23.1.0'
-
+    compile 'com.google.android.gms:play-services:8.4.0'
+    compile 'com.google.api-client:google-api-client:1.22.0'
+    compile 'com.google.code.gson:gson:2.6.2'
 }

@@ -23,17 +23,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.Place;
-import data.Reservation;
+import data.Login;
+import data.Order;
 import interfaces.JsonIF;
 import interfaces.SpecifiedObjectType;
 
-/**
- * Not the Google Places Kind
- */
-public class PlacesDataSource extends NetworkDataSource implements JsonIF, SpecifiedObjectType {
-    private static final String API_BASE = "http://perishableapp20160930072857.azurewebsites.net/api/tblPlaces";
-    private ArrayList<Place> places = new ArrayList<>();
+public class OrderDataSource extends NetworkDataSource implements JsonIF, SpecifiedObjectType {
+    private static final String API_BASE = "http://perishableapp20160930072857.azurewebsites.net/api/tblOrders";
+    private ArrayList<Order> orders = new ArrayList<>();
 
     @Override
     public ArrayList<Object> getHttpGETInputStream() throws IOException {
@@ -70,40 +67,6 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
         transport.shutdown();
         return objects;
     }
-    public void insertPlace(Place place) {
-        Gson gson = new Gson();
-        String insertData = gson.toJson(place);
-        InputStream is = null;
-        NetHttpTransport transport = null;
-        HttpRequest request = null;
-        HttpContent content = null;
-        HttpResponse resp = null;
-        String respCont = "";
-        try {
-            transport = new NetHttpTransport();
-            content = new JsonHttpContent(new JacksonFactory(), insertData);
-            HttpRequestFactory factory = transport.createRequestFactory();
-
-            request = factory.buildPostRequest(new GenericUrl(API_BASE), content);
-            request.getUrl().putAll(getParams());
-            resp = request.execute();
-            is = resp.getContent();
-            if (is != null) {
-                respCont = getJSONFromInputStream(is);
-                Log.i("LoginDS", respCont);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-
-                transport.shutdown();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     protected String getJSONFromInputStream(InputStream is) {
         if (is == null)
@@ -132,7 +95,6 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
         return sb.toString();
     }
 
-
     @Override
     public ArrayList<Object> processJsonArray(JSONArray array) throws JSONException {
         ArrayList<Object> objects = new ArrayList<>();
@@ -144,17 +106,57 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
 
     @Override
     public Object processJsonObject(JSONObject jo) throws JSONException {
-        Place place = new Place();
-        if (jo.has("Id") && !jo.isNull("Id")){
-            place.setId(jo.getInt("Id"));
+        Order order = new Order();
+        if (jo.has("Id") && !jo.isNull("Id")) {
+            order.setId(jo.getInt("Id"));
         }
-        if (jo.has("Name") && !jo.isNull("Name")) {
-            place.setName(jo.getString("Name"));
+        if (jo.has("DateTime") && !jo.isNull("DateTime")) {
+            String dateTime = jo.getString("DateTime");
+            order.setDateTime(dateTime);
         }
-        if (jo.has("Address") && !jo.isNull("Address")) {
-            place.setAddress(jo.getString("Address"));
+        if (jo.has("isActive") && !jo.isNull("isActive")) {
+            order.setActive(jo.getBoolean("isActive"));
         }
-        return place;
+        if (jo.has("fk_CompanyID") && !jo.isNull("fk_CompanyID")) {
+            order.setFk_CompanyID(jo.getInt("fk_CompanyID"));
+        }
+        return order;
+    }
+
+    public void insertOrderData(Order order) {
+        Gson gson = new Gson();
+        String insertData = gson.toJson(order);
+        InputStream is = null;
+        NetHttpTransport transport = null;
+        HttpRequest request = null;
+        HttpContent content = null;
+        HttpResponse resp = null;
+        String respCont = "";
+        try {
+            transport = new NetHttpTransport();
+            content = new JsonHttpContent(new JacksonFactory(), insertData);
+            HttpRequestFactory factory = transport.createRequestFactory();
+
+            request = factory.buildPostRequest(new GenericUrl(API_BASE), content);
+            request.getUrl().putAll(getParams());
+            resp = request.execute();
+            is = resp.getContent();
+            if (is != null) {
+                respCont = getJSONFromInputStream(is);
+                Log.i("LoginDS", respCont);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+
+                transport.shutdown();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -171,8 +173,8 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
 
     @Override
     public void addSpecifiedObjectTypeLocally(Object object) {
-        if (object instanceof Place) {
-            places.add((Place) object);
+        if (object instanceof Order) {
+            orders.add((Order)object);
         }
     }
 }
