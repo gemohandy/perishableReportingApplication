@@ -8,13 +8,20 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import java.util.ArrayList;
+
 import adapters.GridMenuAdapter;
 import ca.team5.perishablereportingapplication.R;
+import data.Order;
+import data.Reservation;
 
 public class GridMenuFragment extends Fragment implements AdapterView.OnItemClickListener {
     private static final String TAG = "GridMenuF";
     private GridView gridView;
     private GridMenuAdapter adapter;
+    private ArrayList<Order> orders = new ArrayList<>();
+    private ArrayList<Reservation> reservations = new ArrayList<>();
+
     public static GridMenuFragment newInstance() {
         GridMenuFragment frag = new GridMenuFragment();
         return frag;
@@ -36,7 +43,7 @@ public class GridMenuFragment extends Fragment implements AdapterView.OnItemClic
     private void bind() {
         if (getActivity() != null) {
             gridView = (GridView)getView().findViewById(R.id.fgm_gridview);
-            adapter = new GridMenuAdapter(getActivity());
+            adapter = new GridMenuAdapter(getActivity(), orders, reservations);
             gridView.setAdapter(adapter);
             gridView.setOnItemClickListener(this);
         }
@@ -50,9 +57,30 @@ public class GridMenuFragment extends Fragment implements AdapterView.OnItemClic
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, adapter.getItem(i), adapter.getItem(i).getTag()).addToBackStack(adapter.getItem(i).getTag()).commitAllowingStateLoss();
                 }
                 break;
-            default:
-
+            case 1:
+                if (getActivity() != null) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, adapter.getItem(i), adapter.getItem(i).getTag()).addToBackStack(adapter.getItem(i).getTag()).commitAllowingStateLoss();
+                }
                 break;
+            default:
+                if (getActivity() != null) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, adapter.getItem(i), adapter.getItem(i).getTag()).addToBackStack(adapter.getItem(i).getTag()).commitAllowingStateLoss();
+                }
+                break;
+        }
+    }
+
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
+        if (adapter != null) {
+            adapter.setOrders(orders);
+        }
+    }
+
+    public void setReservations(ArrayList<Reservation> reservations) {
+        this.reservations = reservations;
+        if (adapter != null) {
+            adapter.setReservations(reservations);
         }
     }
 }

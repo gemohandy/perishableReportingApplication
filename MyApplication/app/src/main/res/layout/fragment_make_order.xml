@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:orientation="vertical"
+    tools:background="@color/transparent_black_percent_50">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+
+        <TextView
+            android:id="@+id/fmo_tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Add Order Items"
+            android:textColor="@color/transparent_white_percent_80"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <android.support.v17.leanback.widget.HorizontalGridView
+            android:id="@+id/fmo_grid_items"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:minHeight="100dp">
+
+        </android.support.v17.leanback.widget.HorizontalGridView>
+
+        <EditText
+            android:id="@+id/fmo_et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/or_enter_a_name"
+            android:textColor="@color/white"
+            android:textColorHint="@color/transparent_white_percent_50"
+            android:imeOptions="actionNext"
+            android:singleLine="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/fmo_tv_qnty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".67"
+                android:gravity="center"
+                android:text="@string/enter_a_quantity_opt"
+                android:textColor="@color/transparent_white_percent_80"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/fmo_et_qnty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".33"
+                android:hint="Enter A Quantity"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:textColorHint="@color/transparent_white_percent_50"
+                android:imeOptions="actionDone"
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <Button
+                android:id="@+id/fmo_btn_add_item"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight=".5"
+                android:background="@color/transparent_black_percent_25"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/add_item"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/fmo_btn_add_whole_order"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight=".5"
+                android:background="@color/transparent_black_percent_25"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/add_order"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/fmo_list_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+    </LinearLayout>
+
+
+</LinearLayout>

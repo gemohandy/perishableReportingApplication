@@ -4,16 +4,16 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Login implements Parcelable {
-    private int Id = -1;
+    private Integer Id = -1;
     private String Username = "";
     private String Password = "";
     private String Name = "";
     private String Phone = "";
     private String Email = "";
-    private int fk_CompanyID = -1;
-    private int fk_CharityID = -1;
+    private Integer fk_CompanyID = -1;
+    private Integer fk_CharityID = -1;
 
-    protected Login(Parcel in) {
+    public Login(Parcel in) {
         Id = in.readInt();
         Username = in.readString();
         Password = in.readString();
@@ -36,6 +36,10 @@ public class Login implements Parcelable {
         }
     };
 
+    public Login() {
+
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -53,11 +57,11 @@ public class Login implements Parcelable {
         parcel.writeInt(fk_CharityID);
     }
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         Id = id;
     }
 
@@ -101,19 +105,19 @@ public class Login implements Parcelable {
         Email = email;
     }
 
-    public int getFk_CompanyID() {
+    public Integer getFk_CompanyID() {
         return fk_CompanyID;
     }
 
-    public void setFk_CompanyID(int fk_CompanyID) {
+    public void setFk_CompanyID(Integer fk_CompanyID) {
         this.fk_CompanyID = fk_CompanyID;
     }
 
-    public int getFk_CharityID() {
+    public Integer getFk_CharityID() {
         return fk_CharityID;
     }
 
-    public void setFk_CharityID(int fk_CharityID) {
+    public void setFk_CharityID(Integer fk_CharityID) {
         this.fk_CharityID = fk_CharityID;
     }
 }

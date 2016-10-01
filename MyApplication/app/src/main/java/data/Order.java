@@ -7,19 +7,23 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Order implements Parcelable {
-    private int Id = -1;
+    private Integer Id = -1;
     private String DateTime = "";
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hhh-mm-ss");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
     private boolean isActive = false;
     private int fk_CompanyID = -1;
     private ArrayList<OrderItem> items = new ArrayList<>();
 
-    protected Order(Parcel in) {
+    public Order(Parcel in) {
         Id = in.readInt();
         DateTime = in.readString();
         isActive = in.readByte() != 0;
         fk_CompanyID = in.readInt();
         in.readTypedList(items, OrderItem.CREATOR);
+    }
+
+    public Order() {
+
     }
 
     @Override
@@ -48,11 +52,11 @@ public class Order implements Parcelable {
         }
     };
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         Id = id;
     }
 
@@ -94,5 +98,16 @@ public class Order implements Parcelable {
 
     public void setItems(ArrayList<OrderItem> items) {
         this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "Order put in at " + getDateTime();
+    }
+
+    public void updateForeignKeys() {
+        for (OrderItem item : items) {
+            item.setFk_OrderID(Id);
+        }
     }
 }

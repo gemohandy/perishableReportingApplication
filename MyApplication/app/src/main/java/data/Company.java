@@ -4,11 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Company implements Parcelable {
-    private int Id = -1;
+    private Integer Id = -1;
     private int fk_PlaceID = -1;
     private Place place;
 
-    protected Company(Parcel in) {
+    public Company(Parcel in) {
         Id = in.readInt();
         fk_PlaceID = in.readInt();
         place = in.readParcelable(Place.class.getClassLoader());
@@ -26,6 +26,10 @@ public class Company implements Parcelable {
         }
     };
 
+    public Company() {
+
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -38,11 +42,11 @@ public class Company implements Parcelable {
         parcel.writeParcelable(place, i);
     }
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         Id = id;
     }
 
