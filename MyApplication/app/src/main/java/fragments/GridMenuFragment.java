@@ -46,7 +46,9 @@ public class GridMenuFragment extends Fragment implements AdapterView.OnItemClic
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         switch (i) {
             case 0:
-
+                if (getActivity() != null) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, adapter.getItem(i), adapter.getItem(i).getTag()).addToBackStack(adapter.getItem(i).getTag()).commitAllowingStateLoss();
+                }
                 break;
             default:
 
