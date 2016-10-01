@@ -1,9 +1,34 @@
-main{
+html{
   text-align:center;
-  width:100%;
+  background-color:#00C890;
 }
+
+body{
+  margin:100px;
+  margin-top:30px;
+  display:block;
+  border-style:solid;
+  border-color:#FFEE00;
+  background:#FFFFF8;
+}
+
 img#banner{
   display:block;
-    margin:auto;
+  margin:auto;
   width:1200px;
+}
+
+#navBar{
+  padding:10px;
+}
+#navBar a{
+  border-style:solid;
+  border-color:#303030;
+  text-decoration:none;
+  padding:10px;
+}
+
+#content{
+  margin:auto;
+  width:70%;
 }
