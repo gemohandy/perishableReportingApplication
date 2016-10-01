@@ -1,5 +1,6 @@
 package fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v17.leanback.widget.HorizontalGridView;
 import android.support.v17.leanback.widget.OnChildSelectedListener;
@@ -102,6 +103,9 @@ public class MakeOrderFragment extends Fragment implements View.OnClickListener,
                 order.setId(id);
                 order.updateForeignKeys();
                 oids.insertOrderItemData(order.getItems());
+                Intent updateIntent = new Intent();
+                updateIntent.setAction("update");
+                getActivity().sendBroadcast(updateIntent);
                 getActivity().getSupportFragmentManager().popBackStack();
                 break;
         }

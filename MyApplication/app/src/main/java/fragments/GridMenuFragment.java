@@ -8,13 +8,20 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import java.util.ArrayList;
+
 import adapters.GridMenuAdapter;
 import ca.team5.perishablereportingapplication.R;
+import data.Order;
+import data.Reservation;
 
 public class GridMenuFragment extends Fragment implements AdapterView.OnItemClickListener {
     private static final String TAG = "GridMenuF";
     private GridView gridView;
     private GridMenuAdapter adapter;
+    private ArrayList<Order> orders = new ArrayList<>();
+    private ArrayList<Reservation> reservations = new ArrayList<>();
+
     public static GridMenuFragment newInstance() {
         GridMenuFragment frag = new GridMenuFragment();
         return frag;
@@ -36,7 +43,7 @@ public class GridMenuFragment extends Fragment implements AdapterView.OnItemClic
     private void bind() {
         if (getActivity() != null) {
             gridView = (GridView)getView().findViewById(R.id.fgm_gridview);
-            adapter = new GridMenuAdapter(getActivity());
+            adapter = new GridMenuAdapter(getActivity(), orders, reservations);
             gridView.setAdapter(adapter);
             gridView.setOnItemClickListener(this);
         }
@@ -61,5 +68,15 @@ public class GridMenuFragment extends Fragment implements AdapterView.OnItemClic
                 }
                 break;
         }
+    }
+
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
+        adapter.setOrders(orders);
+    }
+
+    public void setReservations(ArrayList<Reservation> reservations) {
+        this.reservations = reservations;
+        adapter.setReservations(reservations);
     }
 }

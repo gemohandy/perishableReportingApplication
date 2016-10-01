@@ -178,4 +178,8 @@ public class ReservationDataSource extends NetworkDataSource implements JsonIF, 
             reservations.add((Reservation) object);
         }
     }
+
+    public ArrayList<Reservation> getReservations() {
+        return reservations;
+    }
 }

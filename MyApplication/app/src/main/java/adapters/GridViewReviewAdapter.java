@@ -13,13 +13,17 @@ import java.util.ArrayList;
 
 import ca.team5.perishablereportingapplication.R;
 import data.Order;
+import data.Reservation;
 
 public class GridViewReviewAdapter extends BaseAdapter {
+    private ArrayList<Reservation> reservations = new ArrayList<>();
     private Context context;
     private ArrayList<Order> orders = new ArrayList<>();
 
-    public GridViewReviewAdapter(Context context) {
+    public GridViewReviewAdapter(Context context, ArrayList<Reservation> reservations, ArrayList<Order> orders) {
         this.context = context;
+        this.orders = orders;
+        this.reservations = reservations;
     }
     @Override
     public int getCount() {

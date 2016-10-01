@@ -101,6 +101,7 @@ public class OrderDataSource extends NetworkDataSource implements JsonIF, Specif
         for (int i = 0; i < array.length(); i++) {
             objects.add((String) processJsonObject(array.getJSONObject(i)));
         }
+        addSpecifiedObjectTypeLocally(objects);
         return objects;
     }
 
@@ -181,5 +182,9 @@ public class OrderDataSource extends NetworkDataSource implements JsonIF, Specif
         if (object instanceof Order) {
             orders.add((Order)object);
         }
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
     }
 }

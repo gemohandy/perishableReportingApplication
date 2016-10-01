@@ -50,4 +50,9 @@ public class ReserveOrderGridAdapter extends BaseAdapter {
         tvQuantity.setText(getItem(i).getItems().size() + " Item(s)");
         return view;
     }
+
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
+        notifyDataSetChanged();
+    }
 }
