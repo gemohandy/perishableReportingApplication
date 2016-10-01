@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpContent;
+import com.google.api.client.http.HttpMethods;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpResponse;
@@ -31,7 +32,8 @@ import interfaces.SpecifiedObjectType;
 public class LoginDataSource extends NetworkDataSource implements JsonIF, SpecifiedObjectType {
     private static final String API_BASE = "http://perishableapp20160930072857.azurewebsites.net/api/tblLogin";
 
-    public LoginDataSource() {}
+    public LoginDataSource() {
+    }
 
     @Override
     public ArrayList<Object> getHttpGETInputStream() throws IOException {
@@ -63,7 +65,7 @@ public class LoginDataSource extends NetworkDataSource implements JsonIF, Specif
 
     }
 
-    public void insertLoginData(Login login) {
+    public int insertLoginData(Login login) {
         Gson gson = new Gson();
         String insertData = gson.toJson(login);
         InputStream is = null;
@@ -72,6 +74,7 @@ public class LoginDataSource extends NetworkDataSource implements JsonIF, Specif
         HttpContent content = null;
         HttpResponse resp = null;
         String respCont = "";
+        int id = -1;
         try {
             transport = new NetHttpTransport();
             content = new JsonHttpContent(new JacksonFactory(), insertData);
@@ -84,7 +87,10 @@ public class LoginDataSource extends NetworkDataSource implements JsonIF, Specif
             if (is != null) {
                 respCont = getJSONFromInputStream(is);
                 Log.i("LoginDS", respCont);
-
+                JSONObject jo = new JSONObject(respCont);
+                if (jo.has("Id") && !jo.isNull("Id")) {
+                    id = jo.getInt("Id");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,6 +103,7 @@ public class LoginDataSource extends NetworkDataSource implements JsonIF, Specif
                 e.printStackTrace();
             }
         }
+        return id;
     }
 
     protected String getJSONFromInputStream(InputStream is) {
@@ -126,4 +133,44 @@ public class LoginDataSource extends NetworkDataSource implements JsonIF, Specif
         return sb.toString();
     }
 
+    public boolean authenticate(String username, String pw) {
+        InputStream is = null;
+        NetHttpTransport transport = null;
+        String string = "";
+        HttpRequest request = null;
+        HttpResponse resp = null;
+        HttpContent cont = null;
+        JSONObject jUserName = new JSONObject();
+
+        String contentString = "";
+        try {
+            jUserName.put("Username", username);
+            jUserName.put("Password", pw);
+            transport = new NetHttpTransport();
+            HttpRequestFactory factory = transport.createRequestFactory();
+            cont = new JsonHttpContent(new JacksonFactory(), jUserName.toString());
+            request = factory.buildRequest(HttpMethods.GET, new GenericUrl(API_BASE), cont);
+            request.getUrl().putAll(getParams());
+            resp = request.execute();
+            is = resp.getContent();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (is != null) {
+                    string = getJSONFromInputStream(is);
+                    Log.i("LDS", string);
+                }
+                transport.shutdown();
+                if (resp.getStatusCode() == 200) {
+                    return true;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+
+    }
 }

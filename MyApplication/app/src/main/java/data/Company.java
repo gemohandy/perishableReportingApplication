@@ -8,7 +8,7 @@ public class Company implements Parcelable {
     private int fk_PlaceID = -1;
     private Place place;
 
-    protected Company(Parcel in) {
+    public Company(Parcel in) {
         Id = in.readInt();
         fk_PlaceID = in.readInt();
         place = in.readParcelable(Place.class.getClassLoader());
@@ -25,6 +25,10 @@ public class Company implements Parcelable {
             return new Company[size];
         }
     };
+
+    public Company() {
+
+    }
 
     @Override
     public int describeContents() {

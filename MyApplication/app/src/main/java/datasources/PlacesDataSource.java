@@ -70,7 +70,7 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
         transport.shutdown();
         return objects;
     }
-    public void insertPlace(Place place) {
+    public int insertPlace(Place place) {
         Gson gson = new Gson();
         String insertData = gson.toJson(place);
         InputStream is = null;
@@ -79,6 +79,7 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
         HttpContent content = null;
         HttpResponse resp = null;
         String respCont = "";
+        int id = -1;
         try {
             transport = new NetHttpTransport();
             content = new JsonHttpContent(new JacksonFactory(), insertData);
@@ -91,6 +92,10 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
             if (is != null) {
                 respCont = getJSONFromInputStream(is);
                 Log.i("LoginDS", respCont);
+                JSONObject jo = new JSONObject(respCont);
+                if (jo.has("Id") && !jo.isNull("Id")) {
+                    id = jo.getInt("Id");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,6 +108,7 @@ public class PlacesDataSource extends NetworkDataSource implements JsonIF, Speci
                 e.printStackTrace();
             }
         }
+        return id;
     }
 
     protected String getJSONFromInputStream(InputStream is) {

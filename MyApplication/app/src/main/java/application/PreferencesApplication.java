@@ -11,7 +11,7 @@ public class PreferencesApplication extends Application {
     private static String APPPREFERENCES = "PerishablePrefs";
     private Login login;
 
-    public static SharedPreferences getPreferences(Context context) {
+    public SharedPreferences getPreferences(Context context) {
         return context.getSharedPreferences(APPPREFERENCES, 0);
     }
 }

@@ -1,5 +1,6 @@
 package fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,10 +11,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.gson.Gson;
+
 import adapters.OrganizationAdapter;
+import application.PreferencesApplication;
 import ca.team5.perishablereportingapplication.R;
+import data.Charity;
+import data.Company;
 import data.Login;
 import data.Place;
+import datasources.CharityDatasource;
+import datasources.CompanyDatasource;
+import datasources.LoginDataSource;
+import datasources.PlacesDataSource;
 
 public class RegisterFragment extends Fragment implements View.OnClickListener {
     private EditText etUsername;
@@ -73,7 +83,31 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             login.setPassword(etPassword.getText().toString());
             login.setEmail(etEmail.getText().toString());
             login.setPhone(etPhone.getText().toString());
-            //TODO send upstream with place
+            PlacesDataSource pds =new PlacesDataSource();
+            int pId = pds.insertPlace(place);
+            if (spOrg.getSelectedItem().toString().equals("Business")) {
+                Company company = new Company();
+                CompanyDatasource cds = new CompanyDatasource();
+                company.setFk_PlaceID(pId);
+                int cId = cds.insertCompany(company);
+                login.setFk_CompanyID(cId);
+
+            } else {
+                Charity charity = new Charity();
+                CharityDatasource cds = new CharityDatasource();
+                charity.setFk_PlaceID(pId);
+                int cId = cds.insertCharity(charity);
+                login.setFk_CharityID(cId);
+            }
+            LoginDataSource lds = new LoginDataSource();
+            lds.insertLoginData(login);
+            PreferencesApplication app = (PreferencesApplication)getActivity().getApplication();
+            SharedPreferences.Editor editor = app.getPreferences(getActivity()).edit();
+            Gson gson = new Gson();
+            editor.putString("loginData", gson.toJson(login));
+            editor.putBoolean("loggedIn", true);
+            editor.commit();
+            getActivity().getSupportFragmentManager().popBackStack();
         }
     }
 

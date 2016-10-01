@@ -19,6 +19,8 @@ import adapters.OrderItemAdapter;
 import ca.team5.perishablereportingapplication.R;
 import data.Order;
 import data.OrderItem;
+import datasources.OrderDataSource;
+import datasources.OrderItemsDataSource;
 
 public class MakeOrderFragment extends Fragment implements View.OnClickListener, OnChildSelectedListener, AdapterView.OnItemClickListener {
     private static final String TAG = "MakeOrderF";
@@ -91,14 +93,18 @@ public class MakeOrderFragment extends Fragment implements View.OnClickListener,
                 break;
             case R.id.fmo_btn_add_whole_order:
                 Order order = new Order();
+                OrderDataSource ods = new OrderDataSource();
+                OrderItemsDataSource oids = new OrderItemsDataSource();
                 order.setDateTime(order.getSdf().format(Calendar.getInstance().getTime()));
                 order.setActive(true);
                 order.setItems(addedAdapter.getItems());
-
-                //TODO send upstream
+                int id = ods.insertOrderData(order);
+                order.setId(id);
+                order.updateForeignKeys();
+                oids.insertOrderItemData(order.getItems());
+                getActivity().getSupportFragmentManager().popBackStack();
                 break;
         }
-
     }
 
     @Override

@@ -1,5 +1,6 @@
 package fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,13 +9,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.Calendar;
 
 import adapters.ItemAddedAdapter;
+import application.PreferencesApplication;
 import ca.team5.perishablereportingapplication.R;
+import data.Login;
 import data.Order;
 import data.Reservation;
+import datasources.ReservationDataSource;
 
 public class ReserveOrderOrderDetailsFragment extends Fragment implements View.OnClickListener {
     private Order order;
@@ -62,8 +69,18 @@ public class ReserveOrderOrderDetailsFragment extends Fragment implements View.O
         Reservation reservation = new Reservation();
         reservation.setActive(true);
         reservation.setDateTime(reservation.getSdf().format(Calendar.getInstance().getTime()));
-//        reservation.setFk_CharityID();
-        reservation.setFk_OrderID(order.getId());
-        //TODO set charID and send upstream
+        PreferencesApplication app = (PreferencesApplication)getActivity().getApplication();
+
+        SharedPreferences prefs = app.getPreferences(getActivity());
+        Gson gson = new Gson();
+        try {
+            Login log = gson.fromJson(prefs.getString("login", ""), Login.class);
+            reservation.setFk_CharityID(log.getFk_CharityID());
+            reservation.setFk_OrderID(order.getId());
+            ReservationDataSource rds = new ReservationDataSource();
+            rds.insertReservationData(reservation);
+        } catch(Exception e) {
+            Toast.makeText(getActivity(), "Error Reserving Order For Pickup!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

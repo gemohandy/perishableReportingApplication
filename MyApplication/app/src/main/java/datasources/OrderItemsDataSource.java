@@ -103,7 +103,14 @@ public class OrderItemsDataSource extends NetworkDataSource implements JsonIF, S
         }
     }
 
-    protected String getJSONFromInputStream(InputStream is) {
+    public void insertOrderItemData(ArrayList<OrderItem> orderItem) {
+        for (OrderItem oi : orderItem) {
+            insertOrderItemData(oi);
+        }
+    }
+
+
+        protected String getJSONFromInputStream(InputStream is) {
         if (is == null)
             throw new NullPointerException();
         //instantiates a reader with max size

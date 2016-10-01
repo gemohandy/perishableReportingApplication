@@ -104,4 +104,10 @@ public class Order implements Parcelable {
     public String toString() {
         return "Order put in at " + getDateTime();
     }
+
+    public void updateForeignKeys() {
+        for (OrderItem item : items) {
+            item.setFk_OrderID(Id);
+        }
+    }
 }

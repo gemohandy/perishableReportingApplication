@@ -8,7 +8,7 @@ public class Charity implements Parcelable {
     private int fk_PlaceID = -1;
     private Place place = null;
 
-    protected Charity(Parcel in) {
+    public Charity(Parcel in) {
         Id = in.readInt();
         fk_PlaceID = in.readInt();
         place = in.readParcelable(Place.class.getClassLoader());
@@ -25,6 +25,10 @@ public class Charity implements Parcelable {
             return new Charity[size];
         }
     };
+
+    public Charity() {
+
+    }
 
     @Override
     public int describeContents() {

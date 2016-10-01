@@ -123,7 +123,7 @@ public class OrderDataSource extends NetworkDataSource implements JsonIF, Specif
         return order;
     }
 
-    public void insertOrderData(Order order) {
+    public int insertOrderData(Order order) {
         Gson gson = new Gson();
         String insertData = gson.toJson(order);
         InputStream is = null;
@@ -132,6 +132,7 @@ public class OrderDataSource extends NetworkDataSource implements JsonIF, Specif
         HttpContent content = null;
         HttpResponse resp = null;
         String respCont = "";
+        int id = -1;
         try {
             transport = new NetHttpTransport();
             content = new JsonHttpContent(new JacksonFactory(), insertData);
@@ -144,7 +145,10 @@ public class OrderDataSource extends NetworkDataSource implements JsonIF, Specif
             if (is != null) {
                 respCont = getJSONFromInputStream(is);
                 Log.i("LoginDS", respCont);
-
+                JSONObject jo = new JSONObject(respCont);
+                if (jo.has("Id") && !jo.isNull("Id")) {
+                    id = jo.getInt("Id");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,6 +161,7 @@ public class OrderDataSource extends NetworkDataSource implements JsonIF, Specif
                 e.printStackTrace();
             }
         }
+        return id;
     }
 
     @Override
