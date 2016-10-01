@@ -1,11 +1,13 @@
 package adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -45,11 +47,21 @@ public class GridMenuAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = LayoutInflater.from(context);
         view = inflater.inflate(R.layout.item_grid_menu, viewGroup, false);
-        TextView tvTitle = (TextView)view.findViewById(R.id.igm_tv_title);
+        ImageView ivFeature = (ImageView)view.findViewById(R.id.igm_iv_feature);
+        TextView tvTitle = (TextView)view.findViewById(R.id.igm_iv_title);
         tvTitle.setText(getTitle(i));
+        ivFeature.setImageDrawable(getDrawableAt(i));
         return view;
     }
 
+    public Drawable getDrawableAt(int pos) {
+        switch (pos) {
+            case 0:
+                return context.getDrawable(R.drawable.login);
+            default:
+                return context.getDrawable(R.drawable.canned);
+        }
+    }
     public String getTitle(int pos) {
         switch (pos) {
             case 0:

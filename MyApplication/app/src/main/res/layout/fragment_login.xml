@@ -37,8 +37,10 @@
         android:layout_height="wrap_content"
         android:padding="4dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/transparent_white_percent_25"
-        android:hint="@string/enter_username"/>
+        android:textColorHint="@color/transparent_white_percent_75"
+        android:hint="@string/enter_username"
+        android:imeOptions="actionNext"
+        android:singleLine="true"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,7 +61,7 @@
         android:layout_height="wrap_content"
         android:padding="4dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/transparent_white_percent_25"
+        android:textColorHint="@color/transparent_white_percent_75"
         android:hint="@string/enter_password"
         android:inputType="textPassword"/>
     </LinearLayout>

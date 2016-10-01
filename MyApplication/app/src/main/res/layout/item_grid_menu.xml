@@ -4,16 +4,28 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:background="@color/transparent_white_percent_50"
     android:minHeight="100dp">
-    <TextView
-        android:id="@+id/igm_tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ImageView
+        android:id="@+id/igm_iv_feature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="8dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="16sp"
+        android:background="@android:color/transparent"
         tools:text="Hello World"/>
+
+    <TextView
+        android:id="@+id/igm_iv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@android:color/transparent"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        tools:text="Hello World"/>
+
 
 </LinearLayout>
