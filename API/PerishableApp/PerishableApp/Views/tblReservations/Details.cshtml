@@ -1,0 +1,58 @@
+﻿@model PerishableApp.Models.tblReservation
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>tblReservation</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.tblCharity.Id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tblCharity.Id)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tblOrder.Id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tblOrder.Id)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DateTime)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DateTime)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.isActive)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.isActive)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

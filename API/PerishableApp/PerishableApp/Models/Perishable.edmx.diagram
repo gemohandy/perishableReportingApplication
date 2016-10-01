@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f2ad2963843a4b968ac00f2a877a48a9" Name="Diagram1">
+        <EntityTypeShape EntityType="dbPerishableModel.tblCharity" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPerishableModel.tblCompany" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPerishableModel.tblOrder" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPerishableModel.tblOrderItem" Width="1.5" PointX="7.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPerishableModel.tblPlace" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbPerishableModel.tblReservation" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="dbPerishableModel.FK_tblCharity_tblPlace" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPerishableModel.FK_tblReservation_tblCharity" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPerishableModel.FK_tblCompany_tblPlace" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPerishableModel.FK_tblOrder_tblCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPerishableModel.FK_tblOrderItem_tblOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="dbPerishableModel.FK_tblReservation_tblOrder" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
