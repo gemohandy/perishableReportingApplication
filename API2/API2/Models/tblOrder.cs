@@ -11,7 +11,8 @@ namespace API2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     public partial class tblOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +21,8 @@ namespace API2.Models
             this.tblOrderItems = new HashSet<tblOrderItem>();
             this.tblReservations = new HashSet<tblReservation>();
         }
-    
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public System.DateTime DateTime { get; set; }
         public bool isActive { get; set; }
